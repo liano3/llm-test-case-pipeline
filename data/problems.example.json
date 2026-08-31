@@ -1,0 +1,10 @@
+[
+  {
+    "id": "sum-two-integers",
+    "question": "Given two integers a and b, print their sum.\n\nInput\nTwo integers a and b (-1000 <= a, b <= 1000).\n\nOutput\nPrint a + b.\n\nExamples\nInput\n2 3\nOutput\n5\n",
+    "solutions": [
+      "a, b = map(int, input().split())\nprint(a + b)\n",
+      "a, b = map(int, input().split())\nprint(a - b)\n"
+    ]
+  }
+]
