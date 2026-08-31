@@ -8,31 +8,31 @@
 
 需要 Python 3.10+、一个 OpenAI 兼容接口，以及可选的本地模型服务：
 
-\`\`\`bash
+```bash
 pip install "openai>=1.0.0"
 pip install huggingface_hub vllm
 export OPENAI_BASE_URL=http://127.0.0.1:8000/v1
 export OPENAI_API_KEY=EMPTY
-\`\`\`
+```
 
 ## 本地模型
 
-\`\`\`bash
+```bash
 python model/download.py
 bash model/serve.sh
-\`\`\`
+```
 
-模型下载到 \`model/Qwen3.5-27B/\`。默认使用一张 GPU；多卡可使用：
+模型下载到 `model/Qwen3.5-27B/`。默认使用一张 GPU；多卡可使用：
 
-\`\`\`bash
+```bash
 GPU_IDS=0,1 TP_SIZE=2 bash model/serve.sh
-\`\`\`
+```
 
 ## 数据格式
 
 题目文件是 JSON 数组：
 
-\`\`\`json
+```json
 [
   {
     "id": "problem-id",
@@ -40,14 +40,14 @@ GPU_IDS=0,1 TP_SIZE=2 bash model/serve.sh
     "solutions": ["候选 Python 程序 1", "候选 Python 程序 2"]
   }
 ]
-\`\`\`
+```
 
-合成的输入和输出示例分别位于 \`data/problems.example.json\` 和
-\`data/cases.example.jsonl\`。
+合成的输入和输出示例分别位于 `data/problems.example.json` 和
+`data/cases.example.jsonl`。
 
 ## 使用
 
-\`\`\`bash
+```bash
 mkdir -p artifacts outputs
 
 python src/generate_references.py \
@@ -89,9 +89,9 @@ python src/export_cases.py \
   --problems data/problems.example.json \
   --consensus-report outputs/consensus.json \
   --output outputs/cases.jsonl
-\`\`\`
+```
 
-各脚本可通过 \`--help\` 查看参数。若部分题目生成失败，可使用
-\`src/recover_missing_inputs.py\` 恢复。
+各脚本可通过 `--help` 查看参数。若部分题目生成失败，可使用
+`src/recover_missing_inputs.py` 恢复。
 
 注意：流水线会执行模型生成代码和候选程序，请在隔离的容器或虚拟机中运行。
